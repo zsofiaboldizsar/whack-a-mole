@@ -1,10 +1,11 @@
 const square = document.querySelectorAll('.square');
-console.log(square);
 const mole = document.querySelectorAll('.mole');
 const timeLeft = document.querySelector('#time-left');
 let score = document.querySelector('#score');
+
 let hitPosition;
 let result = 0;
+let currentTime = timeLeft.textContent;
 
 function randomSquare() {
   square.forEach(className => {
@@ -12,7 +13,6 @@ function randomSquare() {
   });
   // randomized div element
   let randomPosition = square[Math.floor(Math.random() * 9)]; 
-  console.log(randomPosition);
   randomPosition.classList.add('mole');
 
   // assign the id of the randomPosition to hitPosition to use later
@@ -32,4 +32,17 @@ function moveMole() {
   let timerId = null;
   timerId = setInterval(randomSquare, 1000);
 }
-//moveMole();
+
+function countDown() {
+  currentTime--;
+  timeLeft.textContent = currentTime;
+
+  if (currentTime === 0) {
+    clearInterval(timerId);
+    alert(`GAME OVER! Your score is ${result}`);
+  }
+}
+
+// let timerId = setInterval(countDown, 1000);
+
+// moveMole();
